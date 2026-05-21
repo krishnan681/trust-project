@@ -1,0 +1,159 @@
+.activities-main {
+  padding: 80px 0 60px;
+}
+
+.activities-intro {
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.activities-intro .section-subtitle {
+  margin: 0 auto;
+}
+
+.activities-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+.activity-card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  transition: all 0.3s ease;
+}
+
+.activity-card:hover {
+  border-color: var(--saffron);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+.activity-card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.activity-card__icon {
+  font-size: 2.4rem;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.activity-card__category {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--saffron);
+  background: rgba(232,115,26,0.1);
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 6px;
+}
+
+.activity-card h3 {
+  font-size: 1.2rem;
+  color: var(--bark);
+}
+
+.activity-card__desc {
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  color: var(--muted);
+  line-height: 1.75;
+  margin-bottom: 20px;
+}
+
+.activity-card__highlights {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px 16px;
+}
+
+.activity-card__highlights li {
+  font-size: 0.84rem;
+  color: var(--bark);
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+}
+
+.activity-bullet {
+  color: var(--saffron);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* Sponsor section */
+.activities-sponsor {
+  background: var(--cream);
+  padding: 80px 0;
+  margin-top: 60px;
+}
+
+.activities-sponsor__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: center;
+}
+
+.activities-sponsor__text p {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.75;
+}
+
+.activities-sponsor__table {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.sponsor-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border);
+  gap: 16px;
+  transition: background 0.2s;
+}
+.sponsor-row:last-child { border-bottom: none; }
+.sponsor-row:hover { background: rgba(232,115,26,0.04); }
+
+.sponsor-row strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--bark);
+  margin-bottom: 3px;
+}
+.sponsor-row span {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.sponsor-row__amount {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--saffron);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .activities-grid { grid-template-columns: 1fr; }
+  .activities-sponsor__inner { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 600px) {
+  .activity-card__highlights { grid-template-columns: 1fr; }
+}

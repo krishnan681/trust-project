@@ -1,0 +1,185 @@
+.footer {
+  margin-top: 80px;
+  position: relative;
+}
+
+.footer__wave {
+  line-height: 0;
+  overflow: hidden;
+}
+.footer__wave svg {
+  width: 100%;
+  height: 60px;
+  display: block;
+}
+
+.footer__body {
+  background: var(--bark);
+  color: rgba(255,255,255,0.8);
+}
+
+.footer__grid {
+  display: grid;
+  grid-template-columns: 1.4fr 0.9fr 1.2fr 1.1fr;
+  gap: 48px;
+  padding: 60px 24px 48px;
+}
+
+/* Brand */
+.footer__logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+.footer__logo svg {
+  width: 44px;
+  height: 44px;
+  color: var(--saffron-lt);
+  flex-shrink: 0;
+}
+.footer__logo-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+}
+.footer__logo-sub {
+  display: block;
+  font-size: 0.68rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--saffron-lt);
+}
+
+.footer__tagline {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 16px;
+}
+
+.footer__reg {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  background: rgba(255,255,255,0.08);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: rgba(255,255,255,0.7);
+}
+
+/* Col */
+.footer__col h4 {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--saffron-lt);
+  margin-bottom: 20px;
+}
+
+.footer__col ul {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer__col ul li a,
+.footer__col ul li {
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+  transition: color 0.2s;
+}
+.footer__col ul li a:hover {
+  color: var(--saffron-lt);
+}
+
+/* Account */
+.footer__account {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  padding: 16px;
+}
+.footer__account-name {
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--gold-lt);
+  margin-bottom: 12px;
+  text-transform: uppercase;
+}
+.footer__account-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 0.82rem;
+}
+.footer__account-row:last-child { border-bottom: none; }
+.footer__account-row span { color: rgba(255,255,255,0.55); }
+.footer__account-row strong { color: #fff; font-weight: 600; }
+
+/* Contact */
+.footer__contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+.footer__contact-list li {
+  display: flex;
+  gap: 10px;
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.7);
+  align-items: flex-start;
+}
+.footer__contact-icon { flex-shrink: 0; }
+.footer__contact-list a { color: rgba(255,255,255,0.7); transition: color 0.2s; }
+.footer__contact-list a:hover { color: var(--saffron-lt); }
+
+.footer__donate-btn {
+  width: 100%;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+
+/* Bottom bar */
+.footer__bottom {
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.footer__bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.45);
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 1024px) {
+  .footer__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer__grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    padding: 40px 24px 32px;
+  }
+  .footer__bottom-inner {
+    flex-direction: column;
+    text-align: center;
+  }
+}
