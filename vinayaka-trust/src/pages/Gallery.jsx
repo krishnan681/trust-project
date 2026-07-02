@@ -1,140 +1,563 @@
-import { useEffect, useRef, useState } from 'react'
-import './Gallery.css'
+// import { useEffect, useRef, useState } from "react";
+// import "./Gallery.css";
+ 
 
-// Gallery uses emoji-based placeholder cards since real images would need hosting
+// const galleryItems = [
+//   {
+//     id: 1,
+//     type: "image",
+//     src: "https://your-image-url-1.jpg",
+//   },
+//   {
+//     id: 2,
+//     type: "image",
+//     src: "https://your-image-url-2.jpg",
+//   },
+//   {
+//     id: 3,
+//     type: "image",
+//     src: "https://your-image-url-3.jpg",
+//   },
+//   {
+//     id: 4,
+//     type: "image",
+//     src: "https://your-image-url-4.jpg",
+//   },
+//   {
+//     id: 5,
+//     type: "image",
+//     src: "https://your-image-url-5.jpg",
+//   },
+//   {
+//     id: 6,
+//     type: "image",
+//     src: "https://your-image-url-6.jpg",
+//   },
+
+//   // VIDEO 1
+//   {
+//     id: 7,
+//     type: "video",
+//     src: "https://your-video-url-1.mp4",
+//     thumbnail: "https://your-video-thumbnail-1.jpg",
+//   },
+
+//   // VIDEO 2
+//   {
+//     id: 8,
+//     type: "video",
+//     src: "https://your-video-url-2.mp4",
+//     thumbnail: "https://your-video-thumbnail-2.jpg",
+//   },
+// ];
+
+// export default function Gallery() {
+//   const [lightbox, setLightbox] = useState(null);
+//   const [currentIndex, setCurrentIndex] = useState(0);
+
+//   const revealRefs = useRef([]);
+
+//   useEffect(() => {
+//     window.scrollTo(0, 0);
+
+//     const observer = new IntersectionObserver(
+//       (entries) =>
+//         entries.forEach((entry) => {
+//           if (entry.isIntersecting) {
+//             entry.target.classList.add("visible");
+//           }
+//         }),
+//       {
+//         threshold: 0.08,
+//       }
+//     );
+
+//     revealRefs.current.forEach((el) => {
+//       if (el) observer.observe(el);
+//     });
+
+//     return () => observer.disconnect();
+//   }, []);
+
+//   const addRef = (el) => {
+//     if (el && !revealRefs.current.includes(el)) {
+//       revealRefs.current.push(el);
+//     }
+//   };
+
+//   const openLightbox = (item, index) => {
+//     setLightbox(item);
+//     setCurrentIndex(index);
+//   };
+
+//   const closeLightbox = () => {
+//     setLightbox(null);
+//   };
+
+//   const nextMedia = () => {
+//     const nextIndex = (currentIndex + 1) % galleryItems.length;
+//     setCurrentIndex(nextIndex);
+//     setLightbox(galleryItems[nextIndex]);
+//   };
+
+//   const prevMedia = () => {
+//     const prevIndex =
+//       (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+
+//     setCurrentIndex(prevIndex);
+//     setLightbox(galleryItems[prevIndex]);
+//   };
+
+//   useEffect(() => {
+//     const handleKeyDown = (e) => {
+//       if (!lightbox) return;
+
+//       if (e.key === "Escape") {
+//         closeLightbox();
+//       }
+
+//       if (e.key === "ArrowRight") {
+//         nextMedia();
+//       }
+
+//       if (e.key === "ArrowLeft") {
+//         prevMedia();
+//       }
+//     };
+
+//     window.addEventListener("keydown", handleKeyDown);
+
+//     return () => {
+//       window.removeEventListener("keydown", handleKeyDown);
+//     };
+//   }, [lightbox, currentIndex]);
+
+//   return (
+//     <main className="gallery page-enter">
+//       {/* HERO SECTION */}
+
+//       <section className="page-hero">
+//         <div className="page-hero__bg" />
+
+//         <div className="container page-hero__content">
+//           <span className="section-tag">Our Gallery</span>
+
+//           <h1>
+//             Moments of
+//             <br />
+//             <em>Impact & Joy</em>
+//           </h1>
+
+//           <p>
+//             Applied Research and Training Centre for Empowerment (ARTCE) is a
+//             non-profit organization dedicated to empowering underprivileged
+//             communities through education, healthcare, environmental
+//             conservation, skill development, and social awareness. We work to
+//             eradicate poverty and illiteracy, promote sustainable development,
+//             protect nature, and support individuals through training,
+//             counseling, and community development programs. Explore our gallery
+//             to see the impact of our initiatives and the lives we continue to
+//             transform.
+//           </p>
+//         </div>
+//       </section>
+
+//       {/* GALLERY */}
+
+//       <section className="gallery-main">
+//         <div className="container">
+//           <div className="gallery-grid">
+//             {galleryItems.map((item, index) => (
+//               <div
+//                 key={item.id}
+//                 className="gallery-item reveal"
+//                 ref={addRef}
+//                 style={{
+//                   transitionDelay: `${(index % 4) * 0.07}s`,
+//                 }}
+//                 onClick={() => openLightbox(item, index)}
+//               >
+//                 <div className="gallery-item__img">
+//                   {item.type === "image" ? (
+//                     <img
+//                       src={item.src}
+//                       alt=""
+//                       loading="lazy"
+//                     />
+//                   ) : (
+//                     <>
+//                       <img
+//                         src={item.thumbnail}
+//                         alt=""
+//                         loading="lazy"
+//                       />
+
+//                       <div className="gallery-video-icon">
+//                         <span>▶</span>
+//                       </div>
+//                     </>
+//                   )}
+//                 </div>
+//               </div>
+//             ))}
+//           </div>
+//         </div>
+//       </section>
+
+//       {/* LIGHTBOX */}
+
+//       {lightbox && (
+//         <div
+//           className="lightbox"
+//           onClick={closeLightbox}
+//         >
+//           <div
+//             className="lightbox__card"
+//             onClick={(e) => e.stopPropagation()}
+//           >
+//             <button
+//               className="lightbox__close"
+//               onClick={closeLightbox}
+//             >
+//               ✕
+//             </button>
+
+//             <button
+//               className="lightbox__nav lightbox__nav--prev"
+//               onClick={prevMedia}
+//             >
+//               ❮
+//             </button>
+
+//             <button
+//               className="lightbox__nav lightbox__nav--next"
+//               onClick={nextMedia}
+//             >
+//               ❯
+//             </button>
+
+//             <div className="lightbox__img">
+//               {lightbox.type === "image" ? (
+//                 <img
+//                   src={lightbox.src}
+//                   alt=""
+//                 />
+//               ) : (
+//                 <video
+//                   src={lightbox.src}
+//                   controls
+//                   autoPlay
+//                   playsInline
+//                 />
+//               )}
+//             </div>
+//           </div>
+//         </div>
+//       )}
+//     </main>
+//   );
+// }
+
+
+
+
+
+
+
+
+import { useEffect, useRef, useState } from "react";
+import "./Gallery.css";
+ 
+
 const galleryItems = [
-  { id: 1, emoji: '🍱', title: 'Daily Meal Service',      category: 'food',       desc: 'Hot nutritious meals served to children daily' },
-  { id: 2, emoji: '👧', title: 'Children at Shelter',     category: 'shelter',    desc: 'Our shelter home — a safe haven for every child' },
-  { id: 3, emoji: '📚', title: 'Education Workshop',      category: 'education',  desc: 'Learning events that open doors of opportunity' },
-  { id: 4, emoji: '🎉', title: 'Pongal Celebration',      category: 'events',     desc: 'Celebrating Tamil culture and festivals with joy' },
-  { id: 5, emoji: '🏥', title: 'Medical Camp',            category: 'medical',    desc: 'Free healthcare and therapy for children in need' },
-  { id: 6, emoji: '👕', title: 'Clothing Distribution',   category: 'clothing',   desc: 'Distributing seasonal garments and essentials' },
-  { id: 7, emoji: '💃', title: 'Cultural Performance',    category: 'events',     desc: 'Children showcasing their talents and creativity' },
-  { id: 8, emoji: '🤝', title: 'Volunteer Day',           category: 'community',  desc: 'Volunteers joining hands to serve the community' },
-  { id: 9, emoji: '🎂', title: 'Birthday Celebrations',   category: 'events',     desc: 'Every child deserves to feel special on their day' },
-  { id: 10, emoji: '🌱', title: 'Empowerment Session',    category: 'education',  desc: 'Building skills and confidence for a better future' },
-  { id: 11, emoji: '🙏', title: 'Community Prayer',       category: 'community',  desc: 'Coming together in gratitude and community spirit' },
-  { id: 12, emoji: '🎨', title: 'Art Therapy',            category: 'medical',    desc: 'Creative expression as healing and development' },
-  { id: 13, emoji: '🏋️', title: 'Physiotherapy Session',  category: 'medical',    desc: 'Dedicated therapy for children with special needs' },
-  { id: 14, emoji: '🌾', title: 'Harvest Festival',       category: 'events',     desc: 'Celebrating the spirit of giving and abundance' },
-  { id: 15, emoji: '📝', title: 'Exam Preparation',       category: 'education',  desc: 'Helping children prepare and succeed in studies' },
-  { id: 16, emoji: '🎤', title: 'Awareness Campaign',     category: 'community',  desc: 'Spreading awareness about child welfare in society' },
-]
-
-const categories = [
-  { id: 'all',       label: 'All' },
-  { id: 'food',      label: 'Food & Nutrition' },
-  { id: 'shelter',   label: 'Shelter' },
-  { id: 'education', label: 'Education' },
-  { id: 'medical',   label: 'Medical' },
-  { id: 'events',    label: 'Events' },
-  { id: 'clothing',  label: 'Clothing' },
-  { id: 'community', label: 'Community' },
-]
+  {
+    id: 1,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img01.jpeg",
+  },
+  {
+    id: 2,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img02.jpeg",
+  },
+  {
+    id: 3,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img03.jpeg",
+  },
+  {
+    id: 4,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img04.jpeg",
+  },
+  {
+    id: 5,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img05.jpeg",
+  },
+  {
+    id: 6,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img06.jpeg",
+  },
+  {
+    id: 7,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img08.jpeg",
+  },
+  {
+    id: 8,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img09.jpeg",
+  },
+  {
+    id: 9,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img10.jpeg",
+  },
+  {
+    id: 10,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img10.jpeg",
+  },
+  {
+    id: 11,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img11.jpeg",
+  },
+  {
+    id: 12,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img12.jpeg",
+  },
+  {
+    id: 13,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img13.jpeg",
+  },
+  {
+    id: 14,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img14.jpeg",
+  },
+  {
+    id: 15,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img15.jpeg",
+  },
+  {
+    id: 15,
+    type: "image",
+    src: "https://vinayakaneedcharitabletrust.com/images/gallery/img16.jpeg",
+  },
+ 
+];
 
 export default function Gallery() {
-  const [filter, setFilter] = useState('all')
-  const [lightbox, setLightbox] = useState(null)
-  const revealRefs = useRef([])
+  const revealRefs = useRef([]);
+  const [lightbox, setLightbox] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  const filtered = filter === 'all' ? galleryItems : galleryItems.filter(g => g.category === filter)
-
-  useEffect(() => {
-    window.scrollTo(0, 0)
-    const obs = new IntersectionObserver(
-      entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible') }),
-      { threshold: 0.08 }
-    )
-    revealRefs.current.forEach(el => el && obs.observe(el))
-    return () => obs.disconnect()
-  }, [])
+  const addRef = (el) => {
+    if (el && !revealRefs.current.includes(el)) {
+      revealRefs.current.push(el);
+    }
+  };
 
   useEffect(() => {
-    revealRefs.current = []
-  }, [filter])
+    window.scrollTo(0, 0);
 
-  const addRef = el => { if (el && !revealRefs.current.includes(el)) revealRefs.current.push(el) }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      {
+        threshold: 0.08,
+      }
+    );
+
+    revealRefs.current.forEach((el) => {
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
+  const openLightbox = (item, index) => {
+    setCurrentIndex(index);
+    setLightbox(item);
+  };
+
+  const closeLightbox = () => {
+    setLightbox(null);
+  };
+
+  const showNext = () => {
+    const nextIndex = (currentIndex + 1) % galleryItems.length;
+    setCurrentIndex(nextIndex);
+    setLightbox(galleryItems[nextIndex]);
+  };
+
+  const showPrev = () => {
+    const prevIndex =
+      (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+
+    setCurrentIndex(prevIndex);
+    setLightbox(galleryItems[prevIndex]);
+  };
 
   useEffect(() => {
-    const onKey = e => { if (e.key === 'Escape') setLightbox(null) }
-    window.addEventListener('keydown', onKey)
-    return () => window.removeEventListener('keydown', onKey)
-  }, [])
+    const handleKeyDown = (e) => {
+      if (!lightbox) return;
+
+      if (e.key === "Escape") {
+        closeLightbox();
+      }
+
+      if (e.key === "ArrowRight") {
+        showNext();
+      }
+
+      if (e.key === "ArrowLeft") {
+        showPrev();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () =>
+      window.removeEventListener("keydown", handleKeyDown);
+  }, [lightbox, currentIndex]);
 
   return (
     <main className="gallery page-enter">
-
+      {/* HERO */}
       <section className="page-hero">
         <div className="page-hero__bg" />
+
         <div className="container page-hero__content">
           <span className="section-tag">Our Gallery</span>
-          <h1>Moments of<br/><em>Impact & Joy</em></h1>
-          <p>Every photograph tells the story of a life touched, a smile earned, and a future built.</p>
+
+          <h1>
+            Moments of
+            <br />
+            <em>Impact & Joy</em>
+          </h1>
+
+          <p>
+            Applied Research and Training Centre for Empowerment
+            (ARTCE) is a non-profit organization dedicated to
+            empowering underprivileged communities through
+            education, healthcare, environmental conservation,
+            skill development, and social awareness. We work to
+            eradicate poverty and illiteracy, promote sustainable
+            development, protect nature, and support individuals
+            through training, counseling, and community
+            development programs. Explore our gallery to see the
+            impact of our initiatives and the lives we continue
+            to transform.
+          </p>
         </div>
       </section>
 
+      {/* GALLERY */}
       <section className="gallery-main">
         <div className="container">
-
-          {/* Filters */}
-          <div className="gallery-filters reveal" ref={addRef}>
-            {categories.map(c => (
-              <button
-                key={c.id}
-                className={`gallery-filter-btn ${filter === c.id ? 'active' : ''}`}
-                onClick={() => setFilter(c.id)}
-              >
-                {c.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Grid */}
           <div className="gallery-grid">
-            {filtered.map((item, i) => (
+            {galleryItems.map((item, index) => (
               <div
                 key={item.id}
                 className="gallery-item reveal"
                 ref={addRef}
-                style={{ transitionDelay: `${(i % 4) * 0.07}s` }}
-                onClick={() => setLightbox(item)}
+                style={{
+                  transitionDelay: `${(index % 4) * 0.08}s`,
+                }}
+                onClick={() =>
+                  openLightbox(item, index)
+                }
               >
                 <div className="gallery-item__img">
-                  <span className="gallery-item__emoji">{item.emoji}</span>
-                </div>
-                <div className="gallery-item__overlay">
-                  <h4>{item.title}</h4>
-                  <p>{item.desc}</p>
-                  <span className="gallery-item__zoom">🔍 View</span>
+                  {item.type === "image" ? (
+                    <img
+                      src={item.src}
+                      alt=""
+                      loading="lazy"
+                    />
+                  ) : (
+                    <>
+                      <img
+                        src={item.thumbnail}
+                        alt=""
+                        loading="lazy"
+                      />
+
+                      <div className="gallery-video-icon">
+                        <span>▶</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             ))}
           </div>
-
-          {filtered.length === 0 && (
-            <div className="gallery-empty">No items in this category yet.</div>
-          )}
-
         </div>
       </section>
 
-      {/* Lightbox */}
+      {/* LIGHTBOX */}
       {lightbox && (
-        <div className="lightbox" onClick={() => setLightbox(null)}>
-          <div className="lightbox__card" onClick={e => e.stopPropagation()}>
-            <button className="lightbox__close" onClick={() => setLightbox(null)}>✕</button>
+        <div
+          className="lightbox"
+          onClick={closeLightbox}
+        >
+          <div
+            className="lightbox__card"
+            onClick={(e) =>
+              e.stopPropagation()
+            }
+          >
+            <button
+              className="lightbox__close"
+              onClick={closeLightbox}
+            >
+              ✕
+            </button>
+
+            <button
+              className="lightbox__nav lightbox__prev"
+              onClick={showPrev}
+            >
+              ‹
+            </button>
+
+            <button
+              className="lightbox__nav lightbox__next"
+              onClick={showNext}
+            >
+              ›
+            </button>
+
             <div className="lightbox__img">
-              <span>{lightbox.emoji}</span>
-            </div>
-            <div className="lightbox__body">
-              <span className="section-tag">{categories.find(c => c.id === lightbox.category)?.label}</span>
-              <h3>{lightbox.title}</h3>
-              <p>{lightbox.desc}</p>
+              {lightbox.type === "image" ? (
+                <img
+                  src={lightbox.src}
+                  alt=""
+                />
+              ) : (
+                <video
+                  src={lightbox.src}
+                  controls
+                  autoPlay
+                  playsInline
+                />
+              )}
             </div>
           </div>
         </div>
       )}
-
     </main>
-  )
+  );
 }
